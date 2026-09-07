@@ -1,0 +1,24 @@
+import asyncio
+from motor.motor_asyncio import AsyncIOMotorClient
+
+async def test_connection():
+    # Force local connection string
+    uri = "mongodb://localhost:27017"
+    client = AsyncIOMotorClient(uri)
+    
+    try:
+        # Ping the server to test connection
+        await client.admin.command('ping')
+        print("SUCCESS: Connected to MongoDB Compass!")
+        
+        # Insert a test document to force database creation
+        db = client["homedone_db"]
+        collection = db["connection_test"]
+        result = await collection.insert_one({"status": "working", "message": "Hello from FastAPI app"})
+        print(f"SUCCESS: Inserted test document with ID: {result.inserted_id}")
+        
+    except Exception as e:
+        print(f"ERROR: Could not connect to MongoDB: {e}")
+
+if __name__ == "__main__":
+    asyncio.run(test_connection())
