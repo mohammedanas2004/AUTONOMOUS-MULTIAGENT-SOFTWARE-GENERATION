@@ -1,0 +1,31 @@
+# Inventory Management System & Multi-Agent Pipeline Engine
+
+A full-stack inventory management application integrated with an autonomous multi-agent software generation pipeline powered by FastAPI, MongoDB, and custom AI agents.
+
+## Features
+- **FastAPI Backend:** Serves live API routes and the application frontend.
+- **Persistent Storage:** Connects locally to MongoDB Compass for data management.
+- **Multi-Agent Engine:** Automates tasks and software generation steps through a coordinated network of specialized agents.
+
+---
+
+## Agentic AI Workflow
+
+The multi-agent system uses a structured, sequential pipeline to process prompts and manage execution:
+
+1. **Prompt Request & Initialization (`models.py` / `main.py`):** 
+   - The user submits a prompt or task request via the app interface or runner script.
+2. **Orchestrator Coordination (`orchestrator.py`):** 
+   - The central orchestrator receives the task, breaks it down, and manages the execution flow across the agent network.
+3. **Specialized Agents (`agents.py`):** 
+   - Individual agents handle specific domains (such as code generation, validation, or task-specific execution) using integrated LLM calls and secure environment configurations.
+4. **Execution & Persistence (`runner.py` / `database.py`):** 
+   - The pipeline executes the generated instructions, handles live database writes to MongoDB, and returns the output to the user interface.
+
+---
+
+## Setup & Run
+
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
